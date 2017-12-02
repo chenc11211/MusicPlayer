@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>music player</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+<svg style="display: none">
+    <symbol viewBox="0 0 30 38" id="download_icon">
+        <g transform="translate(0.000000,38.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M137 374 c-4 -4 -7 -61 -7 -128 l0 -120 -38 37 c-32 31 -41 35 -50
+24 -9 -10 1 -26 48 -72 l60 -59 60 59 c47 46 57 62 48 72 -9 11 -18 7 -49 -23
+l-38 -37 -3 123 c-3 115 -10 144 -31 124z"/>
+            <path d="M10 15 c0 -13 22 -15 140 -15 118 0 140 2 140 15 0 13 -22 15 -140
+15 -118 0 -140 -2 -140 -15z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 37 36" id="mute_icon">
+        <g transform="translate(0.000000,36.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M120 305 c-37 -38 -50 -45 -82 -45 l-38 0 0 -80 0 -80 37 0 c31 0 45
+-8 85 -47 l48 -47 0 172 c0 95 -1 172 -3 172 -2 0 -23 -20 -47 -45z m20 -127
+l0 -91 -22 20 c-13 12 -36 23 -53 25 -28 3 -30 5 -30 48 0 43 1 45 31 48 18 2
+40 12 50 23 9 10 19 19 21 19 1 0 3 -41 3 -92z"/>
+            <path d="M240 228 c0 -6 7 -20 17 -30 15 -17 15 -19 0 -36 -10 -10 -17 -24
+-17 -30 0 -17 20 -15 42 5 17 15 19 15 38 -2 16 -14 23 -16 32 -7 9 9 7 16 -7
+32 -18 19 -18 21 0 40 14 16 16 23 7 32 -9 9 -16 7 -32 -7 -19 -17 -21 -17
+-38 -2 -22 20 -42 22 -42 5z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 44 34" id="heart_icon">
+        <g transform="translate(0.000000,34.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M38 301 c-27 -24 -33 -36 -33 -70 0 -39 6 -47 92 -133 l92 -92 31 29
+30 29 28 -27 c15 -15 33 -27 39 -27 19 0 123 118 123 140 0 11 -16 37 -35 57
+-19 20 -35 42 -35 50 0 8 -13 28 -29 44 -34 34 -75 38 -123 13 -29 -15 -34
+-15 -59 0 -42 25 -84 20 -121 -13z m122 -28 c18 -15 35 -22 38 -17 14 20 57
+44 79 44 30 0 63 -34 63 -64 0 -29 -15 -36 -52 -22 -66 25 -120 -36 -85 -96
+17 -29 17 -32 0 -50 -16 -18 -19 -17 -81 44 -60 60 -92 104 -92 128 0 20 49
+60 74 60 13 0 39 -12 56 -27z m131 -99 c17 -15 20 -15 43 0 34 22 53 20 67 -5
+10 -19 5 -27 -37 -70 l-48 -49 -48 47 c-50 50 -56 61 -36 81 17 17 38 15 59
+-4z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 38 30" id="queue_icon">
+        <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M0 275 c0 -13 28 -15 190 -15 162 0 190 2 190 15 0 13 -28 15 -190
+15 -162 0 -190 -2 -190 -15z"/>
+            <path d="M5 159 c-16 -25 18 -29 191 -27 151 3 179 5 179 18 0 13 -28 15 -182
+18 -125 2 -184 -1 -188 -9z"/>
+            <path d="M0 25 c0 -13 28 -15 190 -15 162 0 190 2 190 15 0 13 -28 15 -190 15
+-162 0 -190 -2 -190 -15z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 20 32" id="pause_icon">
+        <g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M10 160 c0 -125 3 -161 13 -158 9 4 12 44 12 158 0 114 -3 154 -12
+158 -10 3 -13 -33 -13 -158z"/>
+            <path d="M164 307 c-2 -7 -3 -78 -2 -157 2 -104 6 -145 16 -148 9 -3 12 33 12
+157 0 104 -4 161 -10 161 -6 0 -13 -6 -16 -13z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 27 34" id="play_icon">
+        <g transform="translate(0.000000,34.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M0 170 l0 -169 130 82 c71 45 129 84 129 87 0 3 -58 42 -129 87
+l-130 82 0 -169z m137 45 c35 -22 63 -42 63 -45 0 -4 -43 -33 -147 -98 l-23
+-14 0 112 0 112 23 -14 c12 -8 50 -32 84 -53z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 38 42" id="repeat_icon">
+        <g transform="translate(0.000000,42.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M160 382 l0 -32 -80 0 -80 0 0 -140 0 -140 58 0 c46 0 59 3 59 15 0
+11 -12 15 -44 15 l-43 0 0 110 0 110 65 0 65 0 0 -32 0 -32 35 34 c19 19 35
+39 35 45 0 6 -16 26 -35 45 l-35 34 0 -32z"/>
+            <path d="M263 335 c0 -11 12 -15 44 -15 l43 0 0 -110 0 -110 -65 0 -65 0 0 32
+0 32 -35 -34 c-19 -19 -35 -39 -35 -45 0 -6 16 -26 35 -45 l35 -34 0 32 0 32
+80 0 80 0 0 140 0 140 -58 0 c-46 0 -59 -3 -59 -15z"/>
+        </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 38 42" id="repeat_one_icon">
+        <g transform="translate(0.000000,42.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M300 382 l0 -32 -150 0 -150 0 0 -111 c0 -98 2 -110 15 -99 11 9 15
+34 15 96 l0 84 135 0 135 0 0 -32 0 -32 35 34 c19 19 35 39 35 45 0 6 -16 26
+-35 45 l-35 34 0 -32z"/>
+            <path d="M362 278 c-7 -7 -12 -44 -12 -95 l0 -83 -135 0 -135 0 0 32 0 32 -35
+-34 c-19 -19 -35 -39 -35 -45 0 -6 16 -26 35 -45 l35 -34 0 32 0 32 150 0 150
+0 0 110 c0 61 -1 110 -3 110 -2 0 -8 -5 -15 -12z"/>
+            <path d="M178 239 c-22 -23 -23 -39 -3 -39 9 0 15 -9 15 -25 0 -16 6 -25 15
+-25 12 0 15 13 15 55 0 59 -11 68 -42 34z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 38 42" id="shuffle_icon">
+        <g transform="translate(0.000000,42.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M300 382 c0 -30 -2 -32 -38 -32 -36 0 -40 -3 -57 -40 -30 -66 -40
+-68 -71 -10 l-27 50 -54 0 c-40 0 -53 -4 -53 -15 0 -11 12 -15 44 -15 44 0 45
+-1 74 -55 l30 -55 -30 -55 c-29 -54 -30 -55 -74 -55 -32 0 -44 -4 -44 -15 0
+-11 13 -15 53 -15 l53 0 70 125 c62 112 72 125 97 125 24 0 27 -4 27 -32 l0
+-32 35 34 c19 19 35 39 35 45 0 6 -16 26 -35 45 l-35 34 0 -32z"/>
+            <path d="M190 155 c0 -8 8 -30 17 -50 15 -31 21 -35 55 -35 36 0 38 -2 38 -32
+l0 -32 35 34 c19 19 35 39 35 45 0 6 -16 26 -35 45 l-35 34 0 -32 c0 -28 -3
+-32 -28 -32 -22 0 -32 7 -45 35 -17 36 -37 47 -37 20z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 28 36" id="skip_start_icon">
+        <g transform="translate(0.000000,36.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M10 180 c0 -142 2 -170 15 -170 11 0 15 18 17 79 l3 78 110 -77 110
+-77 3 83 c1 46 1 122 0 168 l-3 83 -110 -77 -110 -77 -3 78 c-2 61 -6 79 -17
+79 -13 0 -15 -28 -15 -170z m230 -1 l0 -110 -75 52 c-42 29 -74 56 -73 61 3 7
+137 106 146 108 1 0 2 -50 2 -111z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 28 36" id="skip_end_icon">
+        <g transform="translate(0.000000,36.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M10 180 l0 -172 47 34 c27 19 78 56 115 82 l68 47 0 -80 c0 -74 2
+-81 20 -81 19 0 20 7 20 170 0 163 -1 170 -20 170 -18 0 -20 -7 -20 -81 l0
+-81 -47 34 c-27 19 -78 56 -115 82 l-68 47 0 -171z m180 0 c0 -4 -34 -31 -75
+-59 l-75 -52 0 111 0 111 75 -52 c41 -28 75 -55 75 -59z"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 32 36" id="voice_icon">
+        <g transform="translate(0.000000,36.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M120 305 c-37 -38 -50 -45 -82 -45 l-38 0 0 -80 0 -80 37 0 c31 0 45
+-8 85 -47 l48 -47 0 172 c0 95 -1 172 -3 172 -2 0 -23 -20 -47 -45z m20 -127
+l0 -91 -22 20 c-13 12 -36 23 -53 25 -28 3 -30 5 -30 48 0 43 1 45 31 48 18 2
+40 12 50 23 9 10 19 19 21 19 1 0 3 -41 3 -92z"/>
+            <path d="M257 274 c-3 -4 0 -16 8 -28 19 -27 19 -89 0 -126 -18 -34 -2 -52 23
+-26 21 20 27 123 10 155 -14 26 -30 36 -41 25z"/>
+            <path d="M218 233 c-3 -7 -2 -80 1 -107 1 -5 8 -3 16 4 19 16 20 84 1 99 -8 7
+-16 8 -18 4z"/>
+        </g>
+    </symbol>
+    <symbol viewbox="0 0 17 17" id="list_play_icon">
+        <path d="M3 2.692v11.618l11.618-5.837-11.618-5.781zM4 4.308l8.382 4.17-8.382 4.211v-8.381z" />
+    </symbol>
+    <symbol viewBox="0 0 17 17" id="list_pause_icon">
+        <path d="M3 15h4v-13h-4v13zM4 3h2v11h-2v-11zM10 2v13h4v-13h-4zM13 14h-2v-11h2v11z" />
+    </symbol>
+</svg>
+<div id="container">
+    <div id="header">
+        <h2>MusicPlayer</h2>
+    </div>
+    <div id="main_container">
+        <div id="music_list">
+            <div id="music_list_container">
+                <div class="list_bar">
+                    <ul>
+                        <li id="delete_item">删除</li>
+                        <li id="clear_list">清空</li>
+                    </ul>
+                </div>
+                <div class="list_list">
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <td id="select_all"><input id="select_list" type="checkbox"></td>
+                                <td colspan="2">歌曲</td>
+                                <td>播放</td>
+                                <td>歌手</td>
+                                <td>时长</td>
+                            </tr>
+                            </thead>
+                            <tbody id="music_list_list">
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712011718/1866814f6832311d89ad56872827c1c4/G122/M0B/11/0D/GocBAFofg1GAeeC6AE45LfSy8Lw988.mp3" data-img="http://imge.kugou.com/stdmusic/20171130/20171130120537147721.jpg" data-lyric="[00:00.18]许嵩 - 蝴蝶的时间↵[00:01.29]作词：许嵩↵[00:01.95]作曲：许嵩↵[00:02.66]制作人：许嵩↵[00:28.52]飞过山岗 你不在场↵[00:35.15]我的胸膛 纹路苍茫↵[00:41.78]花开不败 香满楼台↵[00:46.80]我不闻 我不闻↵[00:54.86]飞入黑洞 你不在场↵[01:01.34]时光颠簸 心路苍茫↵[01:07.82]扇动翅膀 它却不响↵[01:12.67]会不会在远方刮起风↵[01:22.76]借我一盏烛火↵[01:25.90]点亮你的轮廓↵[01:29.19]思念通明以后↵[01:32.33]付与一纸传说↵[01:35.72]回忆任它残破↵[01:38.97]可能终会参破↵[01:42.86]百年后谁人还记得我↵[01:49.09]爱是一盏烛火↵[01:52.27]明灭会有因果↵[01:55.51]骤雨疾风吹不散↵[01:59.12]我一念执着↵[02:02.14]等到月影斑驳↵[02:05.43]等到满城花落↵[02:09.08]千年后从你碑前飞过↵[02:35.13]飞入黑洞 你不在场↵[02:41.65]时光颠簸 心路苍茫↵[02:48.19]扇动翅膀 它却不响↵[02:52.95]会不会在远方刮起风↵[03:03.13]借我一盏烛火↵[03:06.12]点亮你的轮廓↵[03:09.42]思念通明以后↵[03:12.55]付与一纸传说↵[03:16.13]回忆任它残破↵[03:19.27]可能终会参破↵[03:22.96]百年后谁人还记得我↵[03:29.23]爱是一盏烛火↵[03:32.52]明灭会有因果↵[03:35.71]骤雨疾风吹不散↵[03:39.20]我一念执着↵[03:42.35]等到月影斑驳↵[03:45.99]等到满城花落↵[03:49.43]千年后从你碑前飞过↵[04:05.56]借我一盏烛火↵[04:08.84]点亮你的轮廓↵[04:11.92]思念通明以后↵[04:15.00]付与一纸传说↵[04:18.56]回忆任它残破↵[04:21.80]可能终会参破↵[04:25.70]百年后谁人还记得我↵[04:31.77]爱是一盏烛火↵[04:34.91]明灭会有因果↵[04:38.16]骤雨疾风吹不散↵[04:41.72]我一念执着↵[04:44.95]等到月影斑驳↵[04:48.17]等到满城花落↵[04:51.91]千年后从你碑前飞过↵[05:02.13]千年后从你碑前飞过">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">蝴蝶时间</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">许嵩</td>
+                                <td class="music_length">05:20</td>
+                            </tr>
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712011744/771519506cd0682e7c710854f3b8b408/G122/M07/08/0D/ug0DAFoekNuADFhAAC8RRgL-360585.mp3" data-img="http://imge.kugou.com/stdmusic/20171130/20171130105316721741.jpg" data-lyric="[00:00.33]王嘉尔 - OKAY↵[00:01.01]作词：王嘉尔↵[00:01.97]作曲：王嘉尔、boytoy↵[00:17.84]Blazing up all night↵[00:21.85]不管有多无奈↵[00:25.78]一直等待无所谓↵[00:29.44]I'll be okay↵[00:33.27]我知道你只在乎虚伪的表面↵[00:37.24]I should let it go↵[00:38.26]但我一直在想念↵[00:41.13]you don't have to go far away↵[00:43.09]再看不见↵[00:45.77]Okay↵[00:47.61]I told myself that I'll be okay↵[00:51.49]无所谓每天擦干眼泪↵[00:54.85]All night 只剩下自己面对↵[00:59.57]I'm on my own↵[01:02.69]就说服自己like↵[01:04.31]I'm feeling good right now↵[01:05.66]I'm feeling good right now↵[01:08.28]I'm feeling good right now↵[01:09.69]I'm feeling good right now↵[01:12.21]I'm feeling good right now↵[01:13.67]I'm feeling good right now↵[01:16.19]I'm feeling good right now↵[01:17.65]I'm feeling good right now↵[01:20.84]Man my vision blurry↵[01:22.56]I know you're outta my zone girl↵[01:24.55]Me Captain↵[01:25.15]you're in my ferry↵[01:26.56]Now sailing all alone girl↵[01:28.49]My life is blindfolded locked up in your shadows↵[01:31.50]Your life with me cropped out of the photos↵[01:33.90]Think I don't know?↵[01:35.07]Girls why you gotta be like this yeah↵[01:37.17]I'm fine I'm fine I'm fine↵[01:38.54]I tried to get you back↵[01:40.19]To do what it takes but you turned your back↵[01:42.16]On me on me alright alright↵[01:45.38]Told myself that I'll be okay↵[01:47.59]Don't worry↵[01:48.25]I'm feeling good right now↵[01:49.82]I'm feeling good right now↵[01:51.58]I told myself that I'll be okay↵[01:55.36]无所谓每天擦干眼泪↵[01:58.78]All night 只剩下自己面对↵[02:03.45]I'm on my own↵[02:06.56]就说服自己like↵[02:08.35]I'm feeling good right now↵[02:09.66]I'm feeling good right now↵[02:12.22]I'm feeling good right now↵[02:13.63]I'm feeling good right now↵[02:16.20]I'm feeling good right now↵[02:17.66]I'm feeling good right now↵[02:20.23]I'm feeling good right now↵[02:21.69]I'm feeling good right now↵[02:24.59]这感觉你不懂↵[02:26.56]那回忆我感动↵[02:28.47]但你没留下什么↵[02:30.28]我却一直在作梦↵[02:32.54]这感觉你不懂↵[02:34.46]那回忆我感动↵[02:36.36]I was only trying be the one for you↵[02:38.35]Baby I was real↵[02:39.61]I told myself that I'll be okay↵[02:43.37]无所谓每天擦干眼泪↵[02:46.80]All night 只剩下自己面对↵[02:51.40]I'm on my own↵[02:54.51]就说服自己like↵[02:56.22]I'm feeling good right now↵[02:57.63]I'm feeling good right now↵[03:00.19]I'm feeling good right now↵[03:01.60]I'm feeling good right now↵[03:04.21]I'm feeling good right now↵[03:05.67]I'm feeling good right now↵[03:08.18]I'm feeling good right now↵[03:09.64]I'm feeling good right now">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">OKAY</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">王嘉尔</td>
+                                <td class="music_length">03:13</td>
+                            </tr>
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712011757/1b4c67b24bcf694007310c84965b5f27/G012/M08/08/05/rIYBAFUJpZ6AHah8ADqQAB_WtKE974.mp3" data-img="http://imge.kugou.com/stdmusic/20150718/20150718113957197635.jpg" data-lyric="[00:00.06]许嵩 - 有何不可↵[00:00.20]词：许嵩↵[00:00.30]曲：许嵩↵[00:00.40]编曲：许嵩↵[00:23.07]天空好像下雨↵[00:25.13]我好想住你隔壁↵[00:27.41]傻站在你家楼下↵[00:29.42]抬起头 数乌云↵[00:31.86]如果场景里出现一架钢琴↵[00:34.19]我会唱歌给你听↵[00:36.59]哪怕好多盆水往下淋↵[00:41.95]夏天快要过去↵[00:44.00]请你少买冰淇淋↵[00:46.42]天凉就别穿短裙↵[00:48.63]别再那么淘气↵[00:51.04]如果有时不那么开心↵[00:53.37]我愿意将格洛米借给你↵[00:55.65]你其实明白我心意↵[00:59.01]为你唱这首歌↵[01:01.24]没有什么风格↵[01:03.55]它仅仅代表着↵[01:05.97]我想给你快乐↵[01:08.32]为你解冻冰河↵[01:10.71]为你做一只扑火的飞蛾↵[01:14.23]没有什么事情是不值得↵[01:17.91]为你唱这首歌↵[01:20.26]没有什么风格↵[01:22.55]它仅仅代表着↵[01:24.94]我希望你快乐↵[01:27.38]为你辗转反侧↵[01:29.77]为你放弃世界有何不可↵[01:33.10]夏末秋凉里带一点温热↵[01:36.86]有换季的颜色↵[01:58.10]天空好像下雨↵[02:00.05]我好想住你隔壁↵[02:02.37]傻站在你家楼下↵[02:04.53]抬起头 数乌云↵[02:06.87]如果场景里出现一架钢琴↵[02:09.43]我会唱歌给你听↵[02:11.67]哪怕好多盆水往下淋↵[02:14.63]往下淋往下淋↵[02:16.78]夏天快要过去↵[02:19.03]请你少买冰淇淋↵[02:21.41]天凉就别穿短裙↵[02:23.45]别再那么淘气↵[02:26.03]如果有时不那么开心↵[02:28.34]我愿意将格洛米借给你↵[02:30.62]你其实明白我心意↵[02:34.03]为你唱这首歌↵[02:36.28]没有什么风格↵[02:38.56]它仅仅代表着↵[02:41.03]我想给你快乐↵[02:43.35]为你解冻冰河↵[02:45.74]为你做一只扑火的飞蛾↵[02:49.24]没有什么事情是不值得↵[02:52.92]为你唱这首歌↵[02:55.30]没有什么风格↵[02:57.63]它仅仅代表着↵[02:59.99]我希望你快乐↵[03:02.37]为你辗转反侧↵[03:04.71]为你放弃世界有何不可↵[03:08.05]夏末秋凉里带一点温热↵[03:21.67]为你解冻冰河↵[03:23.90]为你做一只扑火的飞蛾↵[03:27.11]没有什么事情是不值得↵[03:31.14]为你唱这首歌↵[03:33.25]没有什么风格↵[03:35.59]它仅仅代表着↵[03:38.03]我希望你快乐↵[03:40.44]为你辗转反侧↵[03:42.77]为你放弃世界有何不可↵[03:46.13]夏末秋凉里带一点温热↵[03:49.74]有换季的颜色">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">有何不可</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">许嵩</td>
+                                <td class="music_length">03:59</td>
+                            </tr>
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712012158/e282704f6e2c37dc16ea8b7230066919/G004/M06/04/08/pIYBAFS54SiAMi7PAD8-ejOqpbY010.mp3" data-img="http://imge.kugou.com/stdmusic/20150717/20150717132758317021.jpg" data-lyric="[00:26.93]离开你一百个星期
+↵[00:28.86]我回到了这里
+↵[00:29.93]寻找我们爱过的证据
+↵[00:32.03]没有人愿意提起
+↵[00:33.51]玫瑰花它的过去
+↵[00:35.03]今天这里的主题
+↵[00:36.45]我把它叫作回忆
+↵[00:38.03]我知道爱情这东西
+↵[00:39.70]他没什么道理
+↵[00:40.87]过去我和你在一起
+↵[00:42.50]是我太叛逆
+↵[00:43.71]现在只剩我自己
+↵[00:45.64]偷偷的想你
+↵[00:49.32]玫瑰花的葬礼
+↵[00:52.13]埋葬关于你的回忆
+↵[00:55.12]感觉双手麻痹
+↵[00:57.45]不能自已
+↵[00:58.88]已拉不住你
+↵[01:01.25]真的好美丽
+↵[01:03.64]那天的烟花雨
+↵[01:06.81]我说要娶穿碎花洋裙的你
+↵[01:12.68]玫瑰花的葬礼
+↵[01:15.32]埋葬深深爱着的你
+↵[01:18.63]残朵停止呼吸
+↵[01:20.86]渗入大地
+↵[01:22.29]没人会注意
+↵[01:24.42]一片小雨滴
+↵[01:27.01]陪着我等天明
+↵[01:30.06]我用这最后一分钟怀念你
+↵[01:37.31]我在夜幕笼罩的天桥上潜行
+↵[01:40.20]每一级阶梯
+↵[01:41.11]都留着你我昔日印迹
+↵[01:42.89]温存迷醉吵闹清醒
+↵[01:45.24]都还在我的脚畔
+↵[01:46.61]兜兜兜兜兜转不清
+↵[01:48.28]没来得及把红色玫瑰递给你
+↵[01:50.62]爱就像是一场雨
+↵[01:52.04]已经离我而去
+↵[01:53.31]你说过
+↵[01:54.03]太过鲜艳的爱情终将凋零
+↵[01:59.35]玫瑰花的葬礼
+↵[02:02.35]埋葬关于你的回忆
+↵[02:05.27]感觉双手麻痹
+↵[02:07.61]不能自已
+↵[02:09.14]已拉不住你
+↵[02:11.25]真的好美丽
+↵[02:14.08]那天的烟花雨
+↵[02:17.44]我说要娶穿碎花洋裙的你
+↵[02:22.88]玫瑰花的葬礼
+↵[02:25.73]埋葬深深爱着的你
+↵[02:28.62]残朵停止呼吸
+↵[02:31.00]渗入大地
+↵[02:32.47]没人会注意
+↵[02:34.66]一片小雨滴
+↵[02:37.20]陪着我等天明
+↵[02:40.76]我用这最后一分钟怀念你
+↵[02:46.44]总是回想过去埋怨我自己
+↵[02:52.57]总是不经意间想起了你
+↵[02:58.38]现在的你已经太遥不可及
+↵[03:04.26]只能留在我记忆
+↵[03:10.01]玫瑰花的葬礼
+↵[03:12.82]埋葬关于你的回忆
+↵[03:15.67]感觉双手麻痹
+↵[03:17.91]不能自已
+↵[03:19.33]已拉不住你
+↵[03:21.51]真的好美丽
+↵[03:24.05]那天的烟花雨
+↵[03:27.62]我说要娶穿碎花洋裙的你
+↵[03:33.27]玫瑰花的葬礼
+↵[03:35.91]埋葬深深爱着的你
+↵[03:39.18]残朵停止呼吸
+↵[03:41.36]渗入大地
+↵[03:42.79]没人会注意
+↵[03:45.17]一片小雨滴
+↵[03:47.51]陪着我等天明
+↵[03:50.94]我用这最后一分钟怀念你
+↵[03:56.47]我用这最后一分钟">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">玫瑰花的葬礼</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">许嵩</td>
+                                <td class="music_length">04:19</td>
+                            </tr>
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712022239/cb7c00cd98fdd187e4748f6f424e8af9/G122/M08/13/19/ug0DAFohBjuAJMWUADSjA02l4PQ066.mp3" data-img="http://imge.kugou.com/stdmusic/20171104/20171104101242658082.jpg" data-lyric="[00:00.10]李宇春 - 一趟
+↵[00:01.47]作词：李宇春
+↵[00:02.63]作曲：陈伟伦
+↵[00:03.69]制作人：陈伟伦
+↵[00:04.86]编曲：陈伟伦
+↵[00:09.26]万里无云 两手空空
+↵[00:17.24]炙热少年 春天呐喊
+↵[00:24.97]万物生 破土而长
+↵[00:29.05]年少之梦 闪闪发光
+↵[00:33.17]有声者 向现实开枪
+↵[00:37.10]谁先笑场 谁先投降
+↵[00:41.08]谎言在上 竭尽全力反抗
+↵[00:45.14]烂泥扶墙 小心塌方
+↵[00:49.31]身心滚烫 非要活着天亮
+↵[00:53.22]人间一趟 看看太阳
+↵[01:30.57]浩渺苍穹 夏末冬至
+↵[01:38.61]虚幻当空 格格不入
+↵[01:46.36]大风吹 骄纵若狂
+↵[01:50.36]天地混沌 不明真相
+↵[01:54.37]沉默者 或不屑开腔
+↵[01:58.39]越是倔强 越是悲伤
+↵[02:02.61]跌跌撞撞 闯过马乱兵荒
+↵[02:06.50]几分胆量 不卑不亢
+↵[02:10.68]眇眇你我 青春轮流阵亡
+↵[02:14.68]一腔无邪 热泪盈眶
+↵[02:18.79]谎言在上 竭尽全力反抗
+↵[02:22.75]烂泥扶墙 小心塌方
+↵[02:26.98]身心滚烫 非要活着天亮
+↵[02:31.06]人间一趟 看看太阳
+↵[02:51.50]万里无云 两手空空
+↵[02:59.51]炙热少年 春天呐喊
+↵[03:07.85]不畏将来 不念过往
+↵[03:15.75]秉持心气 何惧远方">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">一趟</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">李宇春</td>
+                                <td class="music_length">03:35</td>
+                            </tr>
+                            <tr class="list_item" data-src="http://fs.w.kugou.com/201712022251/1e771d96b6be34a5fab4d0619e33a246/G117/M05/1E/00/tQ0DAFoeI3SAC0TZAES2YLIBehk260.mp3" data-img="http://imge.kugou.com/stdmusic/20171129/20171129111714718941.jpg" data-lyric="[00:00.39]Alexandros - 明日、また
+↵[00:00.62]词：Yoohei Kawakami
+↵[00:00.76]曲：Yoohei Kawakami
+↵[00:14.16]明け方になって
+↵[00:17.52]僕らはそれぞれの道へ
+↵[00:21.16]進もうとすればするほど
+↵[00:25.62]遠く遠く遠のく
+↵[00:28.39]無我夢中になって
+↵[00:31.69]報われると信じたけど
+↵[00:35.19]叶えようとすればするほど
+↵[00:39.77]淡く淡く泡になって
+↵[00:43.28]Ah
+↵[00:46.04]誰しも自分から逃げたくなって
+↵[00:50.34]Fu
+↵[00:53.05]新しい居場所を探してる
+↵[00:56.24]明日また
+↵[00:58.21]泣きじゃくる時が来たとして
+↵[01:01.73]怯まず笑えば
+↵[01:03.72]あなたは今まで以上に
+↵[01:07.23]強く在れる
+↵[01:08.85]思いも寄らずとして
+↵[01:24.85]泣き方を知って
+↵[01:28.01]僕らは生まれてきたけど
+↵[01:31.93]大人になればなるほど
+↵[01:36.17]乾く乾く乾いて
+↵[01:38.93]怒りまかせで言った
+↵[01:42.39]誰かへの誹謗中傷も
+↵[01:45.91]悔もうとすればするほど
+↵[01:50.37]憎い憎い醜くなって
+↵[01:54.02]Ah
+↵[01:56.61]誰しも自分自身
+↵[01:58.26]守りたいくせして
+↵[02:00.89]Uh
+↵[02:03.60]いつしか自分で傷つけた
+↵[02:06.93]愛したいなら
+↵[02:08.82]思う存分愛せばいい
+↵[02:12.24]今でも疼く傷跡も
+↵[02:15.94]息を吸い吐く身体も
+↵[02:19.42]生きると願うから
+↵[02:34.95]I'd always wanted to be someone else
+↵[02:42.07]With all the lights that I could never have
+↵[02:48.98]I cried when realized that I could never be
+↵[02:56.07]So I gave up and chose to stick with me
+↵[03:01.46]To overcome that someone
+↵[03:04.36]We're the light
+↵[03:10.00]We're the light
+↵[03:16.92]We're the light
+↵[03:24.19]We're the light
+↵[03:31.08]We're the light
+↵[03:38.08]We're the light
+↵[03:45.19]We're the light
+↵[03:52.20]We're the light
+↵[03:59.89]明日また
+↵[04:01.78]泣きじゃくる時が来たとして
+↵[04:05.21]怯まず笑えば
+↵[04:07.21]あなたは今まで以上に
+↵[04:10.84]強く在れる
+↵[04:12.40]鎧を持たずとして
+">
+                                <td class="select"><input type='checkbox'></td>
+                                <td class="music_name" colspan="2">明日、また</td>
+                                <td class="music_operation"><svg class="list_btn"><use xlink:href="#list_play_icon"></use></svg></td>
+                                <td class="music_author">[Alexandros]</td>
+                                <td class="music_length">04:41</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="current_music">
+            <div id="cover">
+                <img id="cover_img" src="" alt="">
+            </div>
+            <div id="lyric">
+                <div id="lyric_list">
+                    <div class="blank"></div>
+                    <div id="lyric_item">
+
+                    </div>
+                </div>
+            </div>
+            <audio id="current_play" src="" autoplay></audio>
+        </div>
+    </div>
+    <div id="music_control">
+        <div>
+            <div class="switch">
+                <a id="add_like" href="javascript:void (0);"><svg><use xlink:href="#heart_icon"></use></svg></a>
+                <a id="download" href="javascript:void (0);"><svg><use xlink:href="#download_icon"></use></svg></a>
+                <a id="order" class="queue" title="顺序播放" href="javascript:void (0);"><svg><use xlink:href="#queue_icon"></use></svg></a>
+            </div>
+            <div class="progress">
+                <div>
+                    <div class="current_info clear">
+                        <div id="progress_music_name">name</div>
+                        <div id="progress_time">
+                            <span id="progress_time_current">03:33</span>/<span id="progress_time_all">04:20</span>
+                        </div>
+                    </div>
+                    <div class="current_progress">
+                        <span id="progress_all_progress">
+                            <span id="progress_current_progress">
+                                <i id="point"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="toggle">
+                <a id="volume" class="on" href="javascript:void (0);"><svg><use xlink:href="#voice_icon"></use></svg></a>
+                <span id="volume_all"><span id="volume_current"></span></span>
+                <a id="per_music" href="javascript:void (0);"><svg><use xlink:href="#skip_start_icon"></use></svg></a>
+                <a id="play" class="pause" href="javascript:void (0);"><svg><use xlink:href="#pause_icon"></use></svg></a>
+                <a id="next_music" href="javascript:void (0);"><svg><use xlink:href="#skip_end_icon"></use></svg></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="back_cover"><img id="back_img" src="" alt=""><div id="back_cover_top"></div></div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+body,div,p,h2,ul,li{
+    margin: 0;
+    padding: 0;
+}
+.clear:after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    clear: both;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+#container{
+    width: 100%;
+    height: 100%;
+}
+#header{
+    width: 100%;
+    height: 50px;
+    background-color: rgba(59, 86, 133, 0.2);
+    position: fixed;
+    z-index: 2;
+    top: 0;
+}
+#header h2{
+    margin-left: 1em;
+    font-size: 26px;
+    color: rgba(79, 142, 188, 0.73);
+    line-height: 50px;
+}
+/*主体列表和播放*/
+#main_container{
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    color: #999;
+}
+/*播放列表*/
+#music_list{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-right: 350px;
+    position: relative;
+}
+#music_list_container{
+    width: 100%;
+    height: 80%;
+    padding-right: 350px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+/*操作栏*/
+#music_list_container .list_bar{
+    width: 100%;
+    height: 102px;
+    box-sizing: border-box;
+    padding:20px 400px 0 30px;
+    position: absolute;
+}
+#music_list_container .list_bar li{
+    height: 40px;
+    width: 80px;
+    box-sizing: border-box;
+    border: 1px solid #444;
+    border-radius: 3px;
+    margin-left: 10px;
+    display: inline-block;
+    list-style: none;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+}
+#music_list_container .list_bar li:hover{
+    background-color: rgba(59, 86, 133, 0.2);
+}
+#music_list_container .list_bar table{
+    width: 100%;
+}
+/*列表栏*/
+#music_list_container .list_list{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 100px 50px 50px 0;
+    /*遮挡溢出*/
+    overflow: hidden;
+}
+#music_list_container .list_list>div{
+    width: 100%;
+    height: 100%;
+    min-width: 500px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#music_list_container table{
+    width: 100%;
+    min-width: 500px;
+    box-sizing: border-box;
+    border-spacing: 0;
+}
+#music_list_container table thead td{
+    border-top: 1px solid #444;
+}
+#music_list_container table td{
+    white-space: nowrap;
+    overflow:hidden;
+    padding: 10px 5px;
+    border-bottom: 1px solid #444;
+}
+#music_list_container table tbody tr:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#music_list_container table tbody tr.active{
+    background-color: rgba(0, 0, 0, 0.15);
+}
+#music_list_container table tbody tr svg{
+    width: 20px;
+    height: 20px;
+    fill:#999;
+    cursor: pointer;
+}
+#music_list_container table tbody tr svg:hover{
+    fill:#ccc;
+}
+#music_list_container table td:nth-child(1){
+    width: 40px;
+}
+#music_list_container table td:nth-child(5){
+    width: 100px;
+}
+
+#current_music{
+    width: 350px;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+}
+#cover{
+    width: 200px;
+    height: 200px;
+    left: 0;
+    right: 0;
+    margin: 100px auto;
+    position: absolute;
+    border-radius: 100px;
+    overflow: hidden;
+}
+#cover_img{
+    width: 200px;
+    height: 200px;
+}
+#cover_img.active{
+    animation: roll 20s linear 0s infinite;
+}
+@keyframes roll {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+#lyric{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 350px;
+}
+#lyric_list{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#lyric_list p{
+    text-align: center;
+    line-height: 36px;
+    white-space: nowrap;
+}
+#lyric_list .blank{
+    height: 50%;
+}
+#lyric_list p.current{
+    color: #c4c069;
+}
+#lyric_list p span{
+    color: #b1cc9b;
+    display: none;
+}
+
+/*定义滚动条*/
+   /*chrome*/
+#lyric_list::-webkit-scrollbar{
+    display: none;
+}
+
+/*底部控制栏*/
+#music_control{
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 0 150px;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+    color: #999;
+}
+#music_control>div{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    min-width: 900px;
+    position: relative;
+}
+#music_control .switch{
+    height: 100%;
+    width: 160px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    position: absolute;
+    left: 0;
+}
+#music_control .switch svg{
+    margin-right: 18px;
+}
+#music_control .progress{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 320px 0 180px;
+}
+#music_control .progress>div{
+    height: 50px;
+}
+/*进度条上部信息*/
+#music_control .progress .current_info{
+    height: 20px;
+}
+#progress_music_name{
+    float: left;
+}
+#progress_time{
+    float: right;
+}
+/*进度条*/
+#music_control .progress .current_progress{
+    height: 30px;
+}
+#progress_all_progress{
+    display: inline-block;
+    width: 100%;
+    height: 2px;
+    background-color: #999;
+    position: relative;
+    cursor: pointer;
+}
+#progress_current_progress{
+    width: 70%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#point{
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    cursor: pointer;
+}
+
+#music_control .toggle{
+    height: 100%;
+    width: 300px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#music_control .toggle svg{
+    margin-left: 18px;
+    vertical-align: middle;
+}
+#music_control svg{
+    height: 30px;
+    width: 30px;
+    fill: #ddd;
+}
+#music_control svg:hover{
+    fill: #ffffff;
+}
+/*音量滑条*/
+#volume_all{
+    display: inline-block;
+    width: 60px;
+    height: 4px;
+    background-color: #a5a5a5;
+    border-radius: 2px;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#volume_current{
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    border-radius: 4px;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+}
+
+#back_cover{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+    /*-webkit-filter: blur(30px);*/
+    overflow: hidden;
+}
+#back_img{
+    min-height: 100%;
+    min-width: 100%;
+    -webkit-filter: blur(40px);
+}
+#back_cover_top{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
